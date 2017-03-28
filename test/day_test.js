@@ -89,6 +89,62 @@ describe('Day', () => {
     })
   })
 
+  describe('custom data', () => {
+    it('should apply the custom props if in customDates array', () => {
+      const day = moment()
+      const customDates = [
+        {day: day.clone(), props: {'data-test': 'data attribute1'}},
+        {day: day.clone().add(1, 'day'), props: {'data-test': 'data attribute2'}}
+      ]
+
+      let shallowDay = renderDay(day, { customDates })
+      expect(shallowDay.hasClass('foo1')).to.equal(false)
+      expect(shallowDay.hasClass('bar1')).to.equal(false)
+      expect(shallowDay.props()['data-test']).to.equal('data attribute1')
+
+      shallowDay = renderDay(day.add(1, 'day'), { customDates })
+      expect(shallowDay.hasClass('foo2')).to.equal(false)
+      expect(shallowDay.hasClass('bar2')).to.equal(false)
+      expect(shallowDay.props()['data-test']).to.equal('data attribute2')
+    })
+
+    it('should apply the custom class if in customDates array', () => {
+      const day = moment()
+      const customDates = [
+        {day: day.clone(), className: 'foo1 bar1'},
+        {day: day.clone().add(1, 'day'), className: 'foo2 bar2'}
+      ]
+
+      let shallowDay = renderDay(day, { customDates })
+      expect(shallowDay.hasClass('foo1')).to.equal(true)
+      expect(shallowDay.hasClass('bar1')).to.equal(true)
+      expect(shallowDay.props()['data-test']).to.equal(undefined)
+
+      shallowDay = renderDay(day.add(1, 'day'), { customDates })
+      expect(shallowDay.hasClass('foo2')).to.equal(true)
+      expect(shallowDay.hasClass('bar2')).to.equal(true)
+      expect(shallowDay.props()['data-test']).to.equal(undefined)
+    })
+
+    it('should apply the custom class and props if in customDates array', () => {
+      const day = moment()
+      const customDates = [
+        {day: day.clone(), className: 'foo1 bar1', props: {'data-test': 'data attribute1'}},
+        {day: day.clone().add(1, 'day'), className: 'foo2 bar2', props: {'data-test': 'data attribute2'}}
+      ]
+
+      let shallowDay = renderDay(day, { customDates })
+      expect(shallowDay.hasClass('foo1')).to.equal(true)
+      expect(shallowDay.hasClass('bar1')).to.equal(true)
+      expect(shallowDay.props()['data-test']).to.equal('data attribute1')
+
+      shallowDay = renderDay(day.add(1, 'day'), { customDates })
+      expect(shallowDay.hasClass('foo2')).to.equal(true)
+      expect(shallowDay.hasClass('bar2')).to.equal(true)
+      expect(shallowDay.props()['data-test']).to.equal('data attribute2')
+    })
+  })
+
   describe('in range', () => {
     const className = 'react-datepicker__day--in-range'
 
