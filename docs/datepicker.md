@@ -31,6 +31,11 @@ type: `node`
 type: `string`
 
 
+### `customDates`
+
+type: `array`
+
+
 ### `customInput`
 
 type: `element`
@@ -312,4 +317,3 @@ defaultValue: `moment().utcOffset()`
 
 type: `bool`
 defaultValue: `false`
-
