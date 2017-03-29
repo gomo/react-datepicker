@@ -132,7 +132,7 @@ var Day = React.createClass({
   },
 
   getClassNames () {
-    return classnames('react-datepicker__day', 'react-datepicker__day--' + this.props.day.isoWeekday(), {
+    return classnames('react-datepicker__day', 'react-datepicker__day--day-of-week-' + this.props.day.isoWeekday(), {
       'react-datepicker__day--disabled': this.isDisabled(),
       'react-datepicker__day--selected': this.isSameDay(this.props.selected),
       'react-datepicker__day--keyboard-selected': this.isKeyboardSelected(),

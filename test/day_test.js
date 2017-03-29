@@ -20,7 +20,7 @@ describe('Day', () => {
     it('should apply the day of week class', () => {
       let day = moment()
       for (var i = 0; i < 7; i++) {
-        const className = 'react-datepicker__day--' + day.isoWeekday()
+        const className = 'react-datepicker__day--day-of-week-' + day.isoWeekday()
         const shallowDay = renderDay(day)
         expect(shallowDay.hasClass(className)).to.equal(true)
         day = day.clone().add(1, 'day')
