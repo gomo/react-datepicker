@@ -16,6 +16,16 @@ describe('Day', () => {
       expect(shallowDay.hasClass('react-datepicker__day')).to.equal(true)
       expect(shallowDay.text()).to.equal(moment().date() + '')
     })
+
+    it('should apply the day of week class', () => {
+      let day = moment()
+      for (var i = 0; i < 7; i++) {
+        const className = 'react-datepicker__day--' + day.isoWeekday()
+        const shallowDay = renderDay(day)
+        expect(shallowDay.hasClass(className)).to.equal(true)
+        day = day.clone().add(1, 'day')
+      }
+    })
   })
 
   describe('selected', () => {
