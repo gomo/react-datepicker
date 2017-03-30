@@ -64,3 +64,17 @@ export function getEffectiveMaxDate ({ maxDate, includeDates }) {
     return maxDate
   }
 }
+
+const dayOfWeekCodes = {
+  1: 'mon',
+  2: 'tue',
+  3: 'wed',
+  4: 'thu',
+  5: 'fri',
+  6: 'sat',
+  7: 'sun'
+}
+
+export function getDayOfWeekCode (day) {
+  return dayOfWeekCodes[day.isoWeekday()]
+}

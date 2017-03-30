@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Day from '../src/day'
 import { shallow } from 'enzyme'
+import { getDayOfWeekCode } from '../src/date_utils'
 
 function renderDay (day, props = {}) {
   return shallow(
@@ -20,7 +21,7 @@ describe('Day', () => {
     it('should apply the day of week class', () => {
       let day = moment()
       for (var i = 0; i < 7; i++) {
-        const className = 'react-datepicker__day--day-of-week-' + day.isoWeekday()
+        const className = 'react-datepicker__day--day-of-week-' + getDayOfWeekCode(day)
         const shallowDay = renderDay(day)
         expect(shallowDay.hasClass(className)).to.equal(true)
         day = day.clone().add(1, 'day')
