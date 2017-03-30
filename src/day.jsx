@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 import classnames from 'classnames'
-import { isSameDay, isDayDisabled, isDayInRange } from './date_utils'
+import { isSameDay, isDayDisabled, isDayInRange, getDayOfWeekCode } from './date_utils'
 
 var Day = React.createClass({
   displayName: 'Day',
@@ -132,7 +132,7 @@ var Day = React.createClass({
   },
 
   getClassNames () {
-    return classnames('react-datepicker__day', {
+    return classnames('react-datepicker__day', 'react-datepicker__day--' + getDayOfWeekCode(this.props.day), {
       'react-datepicker__day--disabled': this.isDisabled(),
       'react-datepicker__day--selected': this.isSameDay(this.props.selected),
       'react-datepicker__day--keyboard-selected': this.isKeyboardSelected(),
