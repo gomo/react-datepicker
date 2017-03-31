@@ -10,6 +10,7 @@ var Day = React.createClass({
     day: React.PropTypes.object.isRequired,
     endDate: React.PropTypes.object,
     highlightDates: React.PropTypes.array,
+    customDates: React.PropTypes.array,
     inline: React.PropTypes.bool,
     month: React.PropTypes.number,
     onClick: React.PropTypes.func,
@@ -55,6 +56,18 @@ var Day = React.createClass({
     const { day, highlightDates } = this.props
     if (!highlightDates) return false
     return highlightDates.some((testDay) => { return isSameDay(day, testDay) })
+  },
+
+  getCustom () {
+    const { day, customDates } = this.props
+    if (customDates) {
+      const custom = customDates.find((custom) => { return isSameDay(day, custom.day) })
+      if (custom) {
+        return custom
+      }
+    }
+
+    return {}
   },
 
   isInRange () {
@@ -131,7 +144,7 @@ var Day = React.createClass({
       this.props.month !== this.props.day.month()
   },
 
-  getClassNames () {
+  getClassNames (customClassName) {
     return classnames('react-datepicker__day', {
       'react-datepicker__day--disabled': this.isDisabled(),
       'react-datepicker__day--selected': this.isSameDay(this.props.selected),
@@ -146,13 +159,15 @@ var Day = React.createClass({
       'react-datepicker__day--today': this.isSameDay(moment.utc().utcOffset(this.props.utcOffset)),
       'react-datepicker__day--weekend': this.isWeekend(),
       'react-datepicker__day--outside-month': this.isOutsideMonth()
-    })
+    }, customClassName)
   },
 
   render () {
+    const custom = this.getCustom()
     return (
       <div
-          className={this.getClassNames()}
+          className={this.getClassNames(custom.className)}
+          {...custom.props}
           onClick={this.handleClick}
           onMouseEnter={this.handleMouseEnter}
           aria-label={`day-${this.props.day.date()}`}

@@ -37,6 +37,7 @@ import Children from './examples/children'
 import Portal from './examples/portal'
 import InlinePortal from './examples/inline_portal'
 import RawChange from './examples/raw_change'
+import CustomDates from './examples/custom_dates'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import './style.scss'
@@ -188,6 +189,10 @@ export default React.createClass({
     {
       title: 'Disable date auto correction',
       component: <DisableDateAutoCorrection />
+    },
+    {
+      title: 'Custom dates',
+      component: <CustomDates />
     }
   ],
 
